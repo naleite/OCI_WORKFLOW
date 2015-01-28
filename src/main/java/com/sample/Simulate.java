@@ -98,7 +98,7 @@ public class Simulate {
 	}
 }
 
-class MyAutomaticHumanSimulatorWorkItemHandler implements WorkItemHandler {
+/*class MyAutomaticHumanSimulatorWorkItemHandler implements WorkItemHandler {
 
     public void executeWorkItem(WorkItem workItem, WorkItemManager workItemManager) {
         System.out.println("Map of Parameters = " + workItem.getParameters());
@@ -109,8 +109,9 @@ class MyAutomaticHumanSimulatorWorkItemHandler implements WorkItemHandler {
 
     }
 }
+*/
 
-class UserTaskItemHandler implements WorkItemHandler {
+/*class UserTaskItemHandler implements WorkItemHandler {
     private WorkItemManager workItemManager;
     private long workItemId;
 
@@ -133,9 +134,9 @@ class UserTaskItemHandler implements WorkItemHandler {
     }
 
 }
+*/
 
-
-class ManualTaskItemHandler implements WorkItemHandler {
+/*class ManualTaskItemHandler implements WorkItemHandler {
     private WorkItemManager workItemManager;
     private long workItemId;
 
@@ -158,3 +159,4 @@ class ManualTaskItemHandler implements WorkItemHandler {
     }
 
 }
+*/
