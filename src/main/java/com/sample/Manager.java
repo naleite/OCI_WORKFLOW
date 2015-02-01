@@ -9,6 +9,7 @@ import org.kie.internal.utils.KieHelper;
 public class Manager {
 	static KieSession ksession;
 	static WorkflowProcessInstance processInstance;
+	
 	public Manager(){
 	
 	}
@@ -31,8 +32,11 @@ public class Manager {
 		ksession.dispose();
 	}
 	
-	public static WorkflowProcessInstance getProcessInstance(){
+	public static WorkflowProcessInstance getProcessInstance(boolean newInstance){
 		if(processInstance==null){
+			processInstance=(WorkflowProcessInstance) getSession().startProcess("com.sample.bpmn.hello");
+		}
+		if(newInstance){
 			processInstance=(WorkflowProcessInstance) getSession().startProcess("com.sample.bpmn.hello");
 		}
 		return processInstance;

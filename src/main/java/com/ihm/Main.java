@@ -16,12 +16,18 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
 
+    	//Charger le fichier fxml
         URL uri_fxml=getClass().getClassLoader().getResource("sample.fxml");
+        
+        //Charger le fichier bpmn
         URL uri_bpmn=getClass().getClassLoader().getResource("sample.bpmn");
         try {
             File fxml=new File(uri_fxml.toURI());
             File bpmn=new File(uri_bpmn.toURI());
+            
+            //Instancier un generateur pour generer l'interface
             Generator gen=new Generator(bpmn,fxml);
+            //Generer l'interface en fonction du fichier sample.bpmn en utilisant le squelette de fxml
             gen.parseBPMN();
 
 
@@ -30,7 +36,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
         Parent root = FXMLLoader.load(uri_fxml);
-        primaryStage.setTitle(" JBPM");
+        primaryStage.setTitle("JBPM Workflow");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

@@ -47,9 +47,9 @@ public class Simulate {
 
     
     // démarre une instance du process pour cette session	
-    WorkflowProcessInstance processInstance = (WorkflowProcessInstance)  ksession
-			.startProcess("com.sample.bpmn.hello");
-	
+    //WorkflowProcessInstance processInstance = (WorkflowProcessInstance)  ksession
+		//	.startProcess("com.sample.bpmn.hello");
+    WorkflowProcessInstance processInstance = (WorkflowProcessInstance) Manager.getProcessInstance(false);
     
     // démarre une deuxième instance du process pour cette session	
     //WorkflowProcessInstance processInstance2 = (WorkflowProcessInstance)  ksession
@@ -69,7 +69,7 @@ public class Simulate {
     
         
     // réalisation de la premiere User Task (vérifier sur quelle instance dans le Handler)
-    humanActivitiesSimHandler.completeWorkItem(null);
+    //humanActivitiesSimHandler.completeWorkItem(null);
     
     // on vérifie qu'on a bien deux noeuds Manual tasks ici
     if (processInstance.getNodeInstances().size() == 2) {
@@ -79,10 +79,10 @@ public class Simulate {
     }
 
     // réalisation de la premiere Manual Task (vérifier sur quelle task dans le Handler)
-    humanActivitiesSimHandler2.completeWorkItem(null);
+    //humanActivitiesSimHandler2.completeWorkItem(null);
 
     // réalisation de la deuxieme Manual Task (vérifier sur quelle task dans le Handler)
-    humanActivitiesSimHandler2.completeWorkItem(null);
+   // humanActivitiesSimHandler2.completeWorkItem(null);
     
     
     // est-on bien arrivé à la fin du traitement? (oui s'il n'y a plus d'instances de nodes)
@@ -92,8 +92,11 @@ public class Simulate {
     	System.out.println("End of states");
         
 
+    
+    
     // on termine la session
 	ksession.dispose();
+	
 	
 	}
 }

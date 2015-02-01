@@ -56,37 +56,47 @@ public class Generator {
 		 result = new StreamResult(this.fxml);
 	 }
 
+	 /**
+	  * Parser BPMN pour recuperer les taches qui vont creer des buttons.
+	  */
 	public void parseBPMN(){
 		doc_bpmn.normalizeDocument();
 		init_fxml();
 		List<NodeList> tasksList=new ArrayList();
+		//Choisir les elements de usertask
 		NodeList usertasks=doc_bpmn.getElementsByTagName("bpmn2:userTask");
+		//Choisir les elements de manualTask
 		NodeList manueltasks=doc_bpmn.getElementsByTagName("bpmn2:manualTask");
 		tasksList.add(usertasks);
 		tasksList.add(manueltasks);
 		Iterator<NodeList> iter=tasksList.iterator();
+		
+		//Pour chaque tache, on recupere le nom de tache et puis on cree un button avec ce nom.
 		while(iter.hasNext()){
 			NodeList list=iter.next();
 		for(int i=0;i<list.getLength();i++){
 			Node task=list.item(i) ;
 			String nodename=task.getAttributes().getNamedItem("name").getNodeValue();
 			System.out.println(nodename);
+			//Creer des buttons 
 			createButtons(nodename);
 		}
 		}
 
 	}
 
+	/**
+	 * On injecte le fichier fxml, modifie les elements dans le fichier et sauvegarde le fichier.
+	 * Dans cette methode, on va recuperer l'element dans HBox et injecter les buttons.
+	 */
 	private void init_fxml() {
+		
 		NodeList paneList = doc_fxml.getElementsByTagName("HBox");
 		Node btnPane=paneList.item(0).getChildNodes().item(1);
 
-		//int longth=btnPane.getChildNodes().getLength();
-		//System.out.println(btnPane.getNodeName()+" "+longth);
-		//remove tous les nodes existants
-
+		
 		NodeList list=btnPane.getChildNodes();
-		//System.out.println(list.item(4));
+	
 
 		while(list.getLength()!=0) {
 			btnPane.removeChild(list.item(0));
@@ -97,7 +107,9 @@ public class Generator {
 	}
 
 	public void  createButtons(String btnName){
-		 //<Button fx:id="btnCreate" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" text="Create" />
+		
+		
+		 //<Button fx:id="btnCreate" text="Create" />
 		 NodeList paneList = doc_fxml.getElementsByTagName("HBox");
 		 Node btnPane=paneList.item(0).getChildNodes().item(1);
 
@@ -113,13 +125,13 @@ public class Generator {
 		 newBtn.setAttributeNode(attr_text);
 
 		 btnPane.appendChild(newBtn);
-		 //btn.getAttributes().getNamedItem("text").setNodeValue(btnName);
-		 //btn.getAttributes().getNamedItem("disable").setNodeValue(disable+"");
-		//String s = btn.getAttributes().getNamedItem("text").getNodeValue();
-		//System.out.println(s);
-		write();
+
+		 write();
 	 }
 	 
+	/**
+	 * sauvegarder le fichier.
+	 */
 		private void write(){
 			try {
 				transformer.transform(source, result);
